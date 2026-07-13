@@ -1,0 +1,198 @@
+/*
+* Mahadev Interior Exterior - Animations
+* Author: Gemini Code Assist
+* Version: 1.0.0
+*/
+
+/* ------------------- */
+/* -- KEYFRAMES -- */
+/* ------------------- */
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+@keyframes loading-progress {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+@keyframes typing {
+    from { max-width: 0 }
+    to { max-width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--accent-gold); }
+}
+
+@keyframes scroll-indicator {
+    0% { opacity: 0; transform: translateY(10px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-10px); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes infinite-slide {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+@keyframes zoom {
+    from {transform:scale(0)}
+    to {transform:scale(1)}
+}
+
+/* ------------------- */
+/* -- ANIMATION CLASSES -- */
+/* ------------------- */
+
+/* Scroll Reveal Animations */
+.reveal-fade, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-zoom {
+    opacity: 0;
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal-up { transform: translateY(50px); }
+.reveal-down { transform: translateY(-50px); }
+.reveal-left { transform: translateX(-50px); }
+.reveal-right { transform: translateX(50px); }
+.reveal-zoom { transform: scale(0.9); }
+
+.is-visible {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}
+
+/* Typing Animation */
+.animate-typing {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: .15em solid var(--accent-gold);
+    animation: typing 3.5s steps(42, end), blink-caret .75s step-end infinite;
+    animation-fill-mode: forwards;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+}
+
+.scroll-indicator a {
+    display: block;
+    width: 24px;
+    height: 40px;
+    border: 2px solid var(--white-color);
+    border-radius: 12px;
+    position: relative;
+}
+
+.scroll-indicator span {
+    display: block;
+    width: 4px;
+    height: 8px;
+    background: var(--white-color);
+    border-radius: 2px;
+    position: absolute;
+    left: 50%;
+    top: 8px;
+    transform: translateX(-50%);
+    animation: scroll-indicator 2s infinite;
+}
+
+/* Floating Shapes */
+.floating-shapes .shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(37, 99, 235, 0.1);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+}
+
+.shape-1 {
+    width: 150px;
+    height: 150px;
+    top: 20%;
+    left: 15%;
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 80px;
+    height: 80px;
+    top: 60%;
+    right: 10%;
+    animation: float 8s ease-in-out infinite 1s;
+}
+
+.shape-3 {
+    width: 50px;
+    height: 50px;
+    top: 80%;
+    left: 25%;
+    animation: float 7s ease-in-out infinite 0.5s;
+}
+
+/* Ripple Button Effect */
+.ripple-btn span.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple 600ms linear;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+@keyframes ripple {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Animated Border Button */
+.animated-border-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.animated-border-btn span {
+    position: relative;
+    z-index: 2;
+}
+
+.animated-border-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: conic-gradient(from var(--angle), transparent 0%, var(--accent-gold), transparent 25%);
+    transform: translate(-50%, -50%) rotate(var(--angle));
+    animation: rotate 4s linear infinite;
+    z-index: 1;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
